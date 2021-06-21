@@ -1,4 +1,4 @@
-package com.supermarket.api.persistence.entity;
+package com.supermarket.api.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 // import javax.persistence.*;
 
 @Document(collection = "products")
-public class ProductEntity {
+public class Product {
 
     @Id
     private String id;
