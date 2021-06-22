@@ -14,7 +14,7 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Optional<Product> getProduct(String productId) {
+    public Optional<Product> getProductById(String productId) {
         return productRepository.findById(productId);
     }
 
@@ -28,7 +28,7 @@ public class ProductService {
     }
 
     public boolean deleteProduct(String productId) throws Exception {
-        return getProduct(productId).map(product -> {
+        return getProductById(productId).map(product -> {
             productRepository.deleteById(productId);
             return true;
         }).orElse(false);
