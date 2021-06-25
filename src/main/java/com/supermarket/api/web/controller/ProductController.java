@@ -37,6 +37,23 @@ public class ProductController {
         return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.CREATED);
     }
 
+    @PutMapping("/product/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable String id, @RequestBody Product product) {
+        Optional<Product> productData = productService.getProductById(id);
+
+        if (productData.isPresent()) {
+            Product _product = productData.get();
+            _product.setName(product.getName());
+            _product.setSellingPrice(product.getSellingPrice());
+            _product.setStock(product.getStock());
+            _product.setAvailable(product.getAvailable());
+
+            return new ResponseEntity<>(productService.saveProduct(_product), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @DeleteMapping("/product/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable("id") String productId) throws Exception {
         if (productService.deleteProduct(productId)) {
